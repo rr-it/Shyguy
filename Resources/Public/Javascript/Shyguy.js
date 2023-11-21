@@ -19,11 +19,11 @@ require(["jquery","ckeditor"], function($) {
 
                 // CKEditor source mode works native, so get the other(s) or use natvie behavior instead
                 if(activeCKEDITOR && activeCKEDITOR.mode !== "source" && activeCKEDITOR.focusManager.hasFocus === true){
-                    activeCKEDITOR.insertText('↵');
+                    activeCKEDITOR.insertText('\uE9AD');
                 }else{
                     let activeElementRange = getCaretPosition(activeElement);
 
-                    $activeElement.val(replaceRange($activeElement.val(), activeElementRange['start'], activeElementRange['end'], '↵'));
+                    $activeElement.val(replaceRange($activeElement.val(), activeElementRange['start'], activeElementRange['end'], '\uE9AD'));
                     $activeElement.change();
                     $activeElement.keyup();
                 }
@@ -34,7 +34,7 @@ require(["jquery","ckeditor"], function($) {
 
         CKEDITOR.on( 'instanceReady', function( evt ) {
 
-            evt.editor.setData(evt.editor.getData().replace(/(\&shy;|\­)/gi, "↵"));
+            evt.editor.setData(evt.editor.getData().replace(/(\&shy;|\u00AD)/gi, "\uE9AD"));
 
         });
 
@@ -46,13 +46,13 @@ require(["jquery","ckeditor"], function($) {
         $('body :not(script,textarea), body textarea[id^="formengine-textarea-"]').contents().filter(function() {
             return this.nodeType === 3;
         }).replaceWith(function() {
-            return this.nodeValue.replace(/(\&shy;|\­)/gi, "↵").replace(/[\u00A0-\u9999<>\&]/g, function (i) {
+            return this.nodeValue.replace(/(\&shy;|\u00AD)/gi, "\uE9AD").replace(/[\u00A0-\u9999<>\&]/g, function (i) {
                 return '&#' + i.charCodeAt(0) + ';';
             });
         });
 
         $('input, .form-wizards-element textarea[id^="formengine-textarea-"]').each(function(){
-            $(this).val($(this).val().replace(/(\&shy;|\­)/gi, "↵"));
+            $(this).val($(this).val().replace(/(\&shy;|\u00AD)/gi, "\uE9AD"));
         });
     }
 
