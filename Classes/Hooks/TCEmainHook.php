@@ -22,7 +22,7 @@ class TCEmainHook
     public function makeRealSoftHyphens(&$value, $key)
     {
         if (is_string($value)) {
-            $value = mb_ereg_replace('\x{21B5}', "\u{00AD}", $value);
+            $value = mb_ereg_replace('\x{E9AD}', "\u{00AD}", $value);
         }
     }
 }
